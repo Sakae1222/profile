@@ -1,52 +1,86 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>プロフィール</title>
+    <title>Aのプロフィール</title>
     <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #ecf0f1;
+            --text-color: #333;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
             margin: 0;
             padding: 20px;
         }
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        h1 {
-            color: #333;
-        }
+
         .container {
             max-width: 800px;
             margin: auto;
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
         section {
+            margin-bottom: 30px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .contact-info {
+            font-style: italic;
+        }
+
+        .experience-item, .education-item {
             margin-bottom: 20px;
         }
-        h2 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 5px;
+
+        .experience-item h3, .education-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
         }
-        .contact-info,
-        .skills,
-        .experience,
-        .education {
-            margin-top: 10px;
+
+        .date {
+            font-style: italic;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Ａのプロフィール</h1>
-        <p>電話: 123-456-7890 | メール: email@example.com</p>
-    </header>
     <div class="container">
+        <header>
+            <h1>Aのプロフィール</h1>
+            <p class="contact-info">電話: 123-456-7890 | メール: email@example.com</p>
+        </header>
+
         <section class="summary">
             <h2>自己紹介</h2>
             <p>日本に暮らしている中国人です。</p>
@@ -54,17 +88,17 @@
 
         <section class="experience">
             <h2>職歴</h2>
-            <div>
+            <div class="experience-item">
                 <h3>職種 - 会社名</h3>
-                <p>2024.4~2025.3</p>
+                <p class="date">2024年4月 ~ 2025年3月</p>
                 <ul>
                     <li>何をやってた</li>
                     <li>何が出来た</li>
                 </ul>
             </div>
-            <div>
+            <div class="experience-item">
                 <h3>職種 - 会社名</h3>
-                <p>2025.4~2026.3</p>
+                <p class="date">2025年4月 ~ 2026年3月</p>
                 <ul>
                     <li>何をやってた</li>
                     <li>何が出来た</li>
@@ -74,9 +108,9 @@
 
         <section class="education">
             <h2>学歴</h2>
-            <div>
+            <div class="education-item">
                 <h3>修士（体育学） - 大阪体育大学</h3>
-                <p>2024.3</p>
+                <p class="date">2024年3月</p>
                 <ul>
                     <li>スポーツマネジメント</li>
                     <li>日本生涯スポーツ学会大会　口頭発表</li>
@@ -92,10 +126,8 @@
                 <li>剣道</li>
                 <li>Photoshop・Illustrator・Indesign</li>
                 <li>プログラミング勉強中</li>
-                <!-- 可以继续添加技能 -->
             </ul>
         </section>
-
     </div>
 </body>
 </html>
