@@ -10,121 +10,483 @@
             --secondary-color: #2c3e50;
             --background-color: #ecf0f1;
             --text-color: #333;
+            --hover-color: #e8f4f8;
+            --shadow-light: 0 2px 10px rgba(0,0,0,0.08);
+            --shadow-medium: 0 4px 20px rgba(0,0,0,0.12);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: var(--background-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: var(--text-color);
             line-height: 1.6;
-            margin: 0;
             padding: 20px;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: auto;
             background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            backdrop-filter: blur(10px);
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            position: relative;
         }
 
         h1 {
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* 下拉目录样式 */
+        .dropdown-nav {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .dropdown-btn {
+            background: linear-gradient(135deg, var(--primary-color), #5dade2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+            font-size: 12px;
+        }
+
+        .dropdown-nav.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            min-width: 250px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-50%) translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .dropdown-nav.active .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--hover-color);
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .dropdown-content a::before {
+            content: "▶";
+            margin-right: 10px;
+            font-size: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .dropdown-content a:hover::before {
+            opacity: 1;
         }
 
         h2 {
             color: var(--secondary-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            margin-top: 30px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin: 40px 0 30px 0;
+            scroll-margin-top: 20px;
+            font-size: 1.8em;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), #5dade2);
+            transition: width 0.5s ease;
         }
 
         section {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            scroll-margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
         }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+        section:nth-child(5) { animation-delay: 0.4s; }
+        section:nth-child(6) { animation-delay: 0.5s; }
 
         ul {
             padding-left: 20px;
         }
 
-        .contact-info {
-            font-style: italic;
+        .selfintroduce-item,.experience-item, .education-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fbff, #f0f8ff);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
         }
 
-        .experience-item, .education-item {
-            margin-bottom: 20px;
+        .experience-item:hover, .education-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-light);
         }
 
         .experience-item h3, .education-item h3 {
             color: var(--secondary-color);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 1.3em;
         }
 
         .date {
             font-style: italic;
             color: #666;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        /* 优化表格样式 */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            margin: 20px 0;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary-color), #5dade2);
+        }
+
+        th {
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--hover-color);
+            transform: scale(1.01);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 横向布局作品集 */
+        .portfolio-list {
+            margin-top: 30px;
+        }
+
+        .portfolio-item {
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #5dade2, #f39c12);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .portfolio-thumbnail {
+            flex: 0 0 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.9), rgba(46, 204, 113, 0.9));
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-info {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .portfolio-info h3 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            line-height: 1.3;
+        }
+
+        .portfolio-info p {
+            margin-bottom: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .portfolio-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .portfolio-item {
+                flex-direction: column;
+                margin-bottom: 25px;
+            }
+
+            .portfolio-thumbnail {
+                flex: none;
+                height: 200px;
+            }
+
+            .portfolio-info {
+                padding: 20px;
+            }
+
+            th, td {
+                padding: 12px 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* 滚动动画 */
+        .section-visible h2::after {
+            width: 60px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Aのプロフィール</h1>
-            <p class="contact-info">電話: 123-456-7890 | メール: <a href="mailto:ske.r.6741@gmail.com"target="_top">ske.r.6741@gmail.com</a></color:black></p>
+            <h1><b>Aのプロフィール</b></h1>
+            <p class="contact-info">電話: 070-2825-3125 | メール: <a href="mailto:ske.r.6741@gmail.com"target="_top">ske.r.6741@gmail.com</a></p>
+            
+            <!-- 下拉目录 -->
+            <div class="dropdown-nav" id="dropdownNav">
+                <button class="dropdown-btn" onclick="toggleDropdown()">
+                    <span>📋 目次</span>
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#summary" onclick="scrollToSection('summary')">自己紹介</a>
+                    <a href="#experience" onclick="scrollToSection('experience')">職歴</a>
+                    <a href="#education" onclick="scrollToSection('education')">学歴</a>
+                    <a href="#license" onclick="scrollToSection('license')">免許・資格</a>
+                    <a href="#skills" onclick="scrollToSection('skills')">スキル・趣味</a>
+                    <a href="#portfolio" onclick="scrollToSection('portfolio')">ポートフォリオ</a>
+                </div>
+            </div>
         </header>
 
-        <section class="summary">
+        <!-- 自己紹介 -->
+        <section class="summary" id="summary">
             <h2>自己紹介</h2>
-            <p>日本に暮らしている中国人です。</p>
-        </section>
-
-        <section class="experience">
-            <h2>職歴</h2>
-            <div class="experience-item">
-                <h3>職種 - 会社名</h3>
-                <p class="date">2024年4月 ~ 現在</p>
+            <div class="selfintroduce-item">
+                <h3>栄　蓉（エイ　ヨウ）</h3>
+                <p class="date">1997年生まれ</p>               
+                
                 <ul>
-                    <li>何をやってた</li>
-                    <li>何が出来た</li>
-                </ul>
-            </div>
-            <div class="experience-item">
-                <h3>職種 - 会社名</h3>
-                <p class="date">2025年4月 ~ 2026年3月</p>
-                <ul>
-                    <li>何をやってた</li>
-                    <li>何が出来た</li>
+                    <li>中国出身 大阪在住</li>
+                    <li>来日6年目</li>
                 </ul>
             </div>
         </section>
 
-        <section class="education">
+        <!-- 学歴 -->
+        <section class="education" id="education">
             <h2>学歴</h2>
             <div class="education-item">
-                <h3>修士（体育学） - 大阪体育大学</h3>
-                <p class="date">2024年3月</p>
+                <h3>大阪体育大学大学院 - 修士（スポーツ科学）</h3>
+                <p class="date">2022年4月～2024年3月</p>               
                 <ul>
-                    <li>スポーツマネジメント</li>
-                    <li>日本生涯スポーツ学会大会　口頭発表</li>
-                    <li>ヨーロッパスポーツマネジメント学会大会　口頭発表</li>
+                    <li><b>専攻分野：</b>スポーツマネジメント</li>                    
+                    <li><b>修士論文テーマ：</b>市民マラソン大会参加者の認識する知覚価値と行動意図</li>
+                    <li><b>主な業績:</b>
+                        <ul>
+                            <li>日本生涯スポーツ学会大会　口頭発表</li>
+                            <li>ヨーロッパスポーツマネジメント学会大会　口頭発表</li>
                 </ul>
             </div>
         </section>
-        
-        <section class="license">
+
+        <!-- 職歴 -->
+        <section class="experience" id="experience">
+            <h2>職歴</h2>
+            <div class="experience-item">
+                <h3>株式会社AOS - 管理部　採用グループ　制作係</h3>
+                <p class="date">2024年4月 ~ 現在</p>
+                
+                <ul>
+                    <li><b>概要：</b>私は現在、株式会社AOSという警備会社の管理部採用グループに所属し、<b>社内唯一のクリエイティブ担当</b>として勤務しています。
+                   <b>主に新卒・中途採用、社員教育、社内広報に関する各種コンテンツ制作を一手に担っております。</b>
+                   ポスター、パンフレット、動画、SNSコンテンツ、Webバナー、交通広告など、<b>幅広い媒体を手掛けており、企画からデザイン、納品までの全工程を担当しています。</b>
+                   デザイン業務を通じて、企業ブランディングや社内コミュニケーションの強化に貢献しています。<br>
+
+                   &nbsp;&nbsp;&nbsp;&nbsp;<b>Photoshop、Illustrator、InDesign</b>などのツールを使いこなし、ビジュアルの完成度だけでなく、伝えたい情報を的確に届ける構成力にも自信があります。
+                   また、コンテンツの目的やターゲットに応じた<b>ディレクション、進行管理</b>など、デザインにとどまらない「伝える仕組みづくり」に取り組んできた経験があります。
+                   社内では、現場社員や人事部門と連携しながら、「伝わる・動かす」クリエイティブを追求しています。<br>
+
+                   &nbsp;&nbsp;&nbsp;&nbsp;また、中国語と日本語のバイリンガルとして、<b>多文化環境でのコミュニケーション</b>も得意としています。</li>
+
+
+                    <li>何が出来た</li>
+                </ul>
+        </section>
+
+        <!-- 免許・資格 -->
+        <section class="license" id="license">
             <h2>免許・資格</h2>
-            <table border="1" cellspacing="0" cellpadding="8" style="width: 100%; border-collapse: collapse;">
-                <thead style="background-color: #3498db; color: white;">
+            <table>
+                <thead>
                     <tr>
-                        <th>年&nbsp;&nbsp;&nbsp;月</th>
+                        <th>年&nbsp;月</th>
                         <th>免許・資格</th>
                      </tr>
                 </thead>
@@ -143,22 +505,21 @@
                     </tr>
                     <tr>
                         <td>2024年8月</td>
-                        <td>TOEIC Listening&Reading Test 635点　取得</td>
+                        <td>TOEIC Listening&Reading Test　635点</td>
                     </tr>
                     <tr>
                         <td>2024年11月</td>
                         <td>剣道二段　取得</td>
                     </tr>
-                    </tbody>
+                </tbody>
             </table>
         </section>
-
-
-                    
-        <section class="skills">
+        
+        <!-- スキル・趣味 -->
+        <section class="skills" id="skills">
             <h2>スキル・趣味</h2>
-            <table border="1" cellspacing="0" cellpadding="8" style="width: 100%; border-collapse: collapse;">
-                <thead style="background-color: #3498db; color: white;">
+            <table>
+                <thead>
                     <tr>
                         <th>カテゴリ</th>
                         <th>内容</th>
@@ -166,85 +527,148 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>デザインツール</td>
+                        <td><b>デザインツール</b></td>
                         <td>Adobe Photoshop、Illustrator、InDesign、Premiere Pro</td>
                     </tr>
                     <tr>
-                        <td>マイクロソフト</td>
+                        <td><b>マイクロソフト</b></td>
                         <td>Microsoft Office、Excel、Word、PowerPoint</td>
+                    </tr>                    
+                    <tr>
+                        <td><b>プログラミング</b></td>
+                        <td>HTML・CSS（勉強中）</td>
                     </tr>
                     <tr>
-                        <td>スポーツ</td>
-                        <td>長距離走、剣道二段</td>
-                    </tr>
-                    <tr>
-                        <td>プログラミング</td>
-                        <td>HTML・CSS（学習中）</td>
+                        <td><b>スポーツ</b></td>
+                        <td>マラソン、剣道</td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
-        <section class="portfolio">
-            <h2>🖼️ポートフォリオ</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-                <div style="flex: 1 1 45%; background-color: #f9f9f9; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1);">
-                    <h3>万博新規求人駅広告<br>＠大阪メトロ御堂筋線 梅田駅</h3>
-                    <img src="AED2100.png" alt="駅広告" style="width: 100%; border-radius: 4px;">
-                    <p><b>企画背景：</b>万博での新規事業に伴う採用需要の増加に対応し、企業の認知度を高めるため。</p>
-                    <p><b>デザインのポイント：</b>高時給の仕事を探している人をターゲットにして、待遇を強調する。地下鉄の照明や会社の制服の色との相性を考えて、背景に黄色を使用。</p>
-                    <p><b>結果：</b>新規採用約400人の獲得に貢献。</p>
-                    <p><b>制作ツール:</b> Adobe Photoshop、Illustrator</p>
-                    <a href="https://drive.google.com/drive/folders/1DqguQrko5AVgEVRHxMbnPEy1CmV57zjr" target="_blank">▶ Google drive</a>
-                </div>
-                <div style="flex: 1 1 45%; background-color: #f9f9f9; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1);">
-                    
-                    <h3>2025年度<br>高校新卒採用パンフレット</h3>
-                    <img src="パンフレット.png" alt="パンフレット" style="width: 100%; border-radius: 4px;">
-                    <p><b>企画背景：</b>新卒採用需要の増加に対応し、警備会社への信頼・親しみを創出。</p>
-                    <p><b>デザインのポイント：</b>ポップなデザインスタイルで、明るい色を基調に構成。</p>
-                    <p><b>結果：</b>高校生に対して「説明しやすい」と採用担当者から高評価を得ている。</p>
-                    <a href="https://drive.google.com/file/d/1od-jiJXlitTQz6CgOhnv6FcPDUNSaBNo/view?usp=drive_link" target="_blank">▶ Google drive</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="portfolio">
-            <h2>🖼️ポートフォリオ</h2>
+        <!-- ポートフォリオ -->
+        <section class="portfolio" id="portfolio">
+            <h2>🖼️ ポートフォリオ</h2>
             
-            <div style="display: flex; flex-direction: column; gap: 30px;">
-                <!-- 第一个作品 -->
-                <div style="display: flex; gap: 20px; background-color: #f9f9f9; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1);">
-                    <div style="flex: 1;">
-                        <img src="AED2100.png" alt="駅広告" style="width: 100%; height: auto; border-radius: 4px; object-fit: cover;">
+            <div class="portfolio-list">
+                <!-- 作品1 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-thumbnail">
+                        <img src="AED2100.png" alt="駅広告">
+                        <div class="portfolio-overlay">2024年12月</div>
                     </div>
-                    <div style="flex: 1; padding: 0 10px;">
-                        <h3><br>万博新規求人駅広告<br>＠大阪メトロ御堂筋線 梅田駅</h3><br>
-                        <p><b>企画背景：</b>万博での新規事業に伴う採用需要の増加に対応し、企業の認知度を高めるため。</p>
+                    <div class="portfolio-info">
+                        <h3>万博新規求人交通広告<br>＠大阪メトロ御堂筋線 梅田駅</h3>
+                        <p><b>企画背景：</b>万博での新規事業に伴う採用需要の増加に対応し、企業の認知度を高めるため。梅田駅、難波駅をはじめ、計6駅に掲載中。</p>
                         <p><b>デザインのポイント：</b>高時給の仕事を探している人をターゲットにして、待遇を強調する。地下鉄の照明や会社の制服の色との相性を考えて、背景に黄色を使用。</p>
                         <p><b>結果：</b>新規採用約400人の獲得に貢献。</p>
                         <p><b>制作ツール:</b> Adobe Photoshop、Illustrator</p>
-                        <a href="https://drive.google.com/drive/folders/1DqguQrko5AVgEVRHxMbnPEy1CmV57zjr" target="_blank">▶ Google drive</a>
                     </div>
                 </div>
                 
-                <!-- 第二个作品 -->
-                <div style="display: flex; gap: 20px; background-color: #f9f9f9; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1);">
-                    <div style="flex: 1;">
-                        <img src="パンフレット.png" alt="パンフレット" style="width: 100%; height: auto; border-radius: 4px; object-fit: cover;">
+                <!-- 作品2 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-thumbnail">
+                        <img src="youtube.jpg" alt="youtube">
+                        <div class="portfolio-overlay">2024年10月</div>
                     </div>
-                    <div style="flex: 1; padding: 0 10px;">
-                        <h3><br>2025年度<br>高校新卒採用パンフレット</h3><br>
-                        <p><b>企画背景：</b>新卒採用需要の増加に対応し、警備会社への信頼・親しみを創出。</p>
+                    <div class="portfolio-info">
+                        <h3>万博地方＆早期採用求人動画<br>＠Youtube</h3>
+                        <p><b>企画背景：</b>万博での新規事業に伴う採用需要の増加に対応し、地方からの人材確保を目的とした動画制作。</p>
                         <p><b>デザインのポイント：</b>ポップなデザインスタイルで、明るい色を基調に構成。</p>
+                        <p><b>結果：</b>万博案件を軸とした100人規模の採用実績に貢献。</p>
+                        <p><b>制作ツール:</b> PowerPoint、Adobe Premiere Pro</p>
+                    </div>
+                </div>
+
+                <!-- 作品3 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-thumbnail">
+                        <img src="パンフレット.png" alt="パンフレット">
+                        <div class="portfolio-overlay">2025年4月</div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>2025年度<br>高校新卒採用パンフレット</h3>
+                        <p><b>企画背景：</b>万博の新規需要に向けて、地方からの早期大量採用を実現するための情報発信ツールとして企画。</p>
+                        <p><b>デザインのポイント：</b>動画制作を見据えた簡易パワポ形式で、視覚的にわかりやすくテンポよく伝える構成に工夫。</p>
                         <p><b>結果：</b>高校生に対して「説明しやすい」と採用担当者から高評価を得ている。</p>
-                        <a href="https://drive.google.com/file/d/1od-jiJXlitTQz6CgOhnv6FcPDUNSaBNo/view?usp=drive_link" target="_blank">▶ Google drive</a>
+                        <p><b>制作ツール:</b> Adobe InDesign、Photoshop、Illustrator</p>
+                    </div>
+                </div>
+
+                <!-- 作品4 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-thumbnail">
+                        <img src="web seminar.jpg" alt="WEB　セミナー">
+                        <div class="portfolio-overlay"><br>2025年1月</div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>採用広報パワーポイント<br>＠マイナビWEBセミナー</h3>
+                        <p><b>企画背景：</b>人手不足や業界イメージの課題に対し、若年層に向けて警備業界の魅力を発信するための採用広報。</p>
+                        <p><b>デザインのポイント：</b>信頼感と親しみやすさを両立し、写真や配色でリアルな職場の雰囲気を伝えるビジュアル設計。</p>
+                        <p><b>想定結果：</b>業界への理解と好感度が高まり、AOSへの応募意欲を持つ若年層の増加が期待される。</p>
+                        <p><b>制作ツール:</b>PowerPoint</p>
                     </div>
                 </div>
             </div>
         </section>
-
-
     </div>
+
+    <script>
+        // 下拉菜单控制
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownNav');
+            dropdown.classList.toggle('active');
+        }
+
+        // 点击其他地方关闭下拉菜单
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('dropdownNav');
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // 平滑滚动
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+            // 关闭下拉菜单
+            document.getElementById('dropdownNav').classList.remove('active');
+        }
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有section
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
 </body>
 </html>
