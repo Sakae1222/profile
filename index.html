@@ -225,7 +225,7 @@
             font-size: 0.9em;
             margin-bottom: 10px;
         }
-
+    
         /* 优化表格样式 */
         table {
             width: 100%;
@@ -264,6 +264,36 @@
         tbody tr:last-child td {
             border-bottom: none;
         }
+
+        /* 作品集媒体类型图标 */
+        .media-type-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--secondary-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            backdrop-filter: blur(5px);
+            z-index: 10;
+        }
+
+        .media-icon {
+            font-size: 14px;
+        }
+
+        /* 不同媒体类型的颜色 */
+        .media-poster { background: rgba(231, 76, 60, 0.6);}
+        .media-video { background: rgba(155, 89, 182, 0.6);}
+        .media-brochure { background: rgba(39, 174, 96, 0.6);}
+        .media-presentation { background: rgba(241, 196, 15, 0.6);}
+
 
         /* 横向布局作品集 */
         .portfolio-list {
@@ -400,6 +430,18 @@
         .section-visible h2::after {
             width: 60px;
         }
+        
+        /* 底部引言样式 */
+        .intro-quote {
+        margin-top: 25px;    
+        padding: 15px 0;    
+        border-top: 1px solid #e8e8e8;    
+        text-align: right;    
+        font-style: italic;    
+        color: #888;    
+        font-size: 0.9em;    
+        position: relative;
+        }
     </style>
 </head>
 <body>
@@ -475,8 +517,6 @@
 
                    &nbsp;&nbsp;&nbsp;&nbsp;また、中国語と日本語のバイリンガルとして、<b>多文化環境でのコミュニケーション</b>も得意としています。</li>
 
-
-                    <li>何が出来た</li>
                 </ul>
         </section>
 
@@ -555,10 +595,14 @@
                 <div class="portfolio-item">
                     <div class="portfolio-thumbnail">
                         <img src="AED2100.png" alt="駅広告">
+                        <div class="media-type-badge media-poster">
+                            <span class="media-icon">🏪</span>
+                            <span>交通広告</span>
+                        </div>
                         <div class="portfolio-overlay">2024年12月</div>
                     </div>
                     <div class="portfolio-info">
-                        <h3>万博新規求人交通広告<br>＠大阪メトロ御堂筋線 梅田駅</h3>
+                        <h3>万博新規求人交通広告<br>＠大阪メトロ御堂筋線 梅田駅</h3>                        
                         <p><b>企画背景：</b>万博での新規事業に伴う採用需要の増加に対応し、企業の認知度を高めるため。梅田駅、難波駅をはじめ、計6駅に掲載中。</p>
                         <p><b>デザインのポイント：</b>高時給の仕事を探している人をターゲットにして、待遇を強調する。地下鉄の照明や会社の制服の色との相性を考えて、背景に黄色を使用。</p>
                         <p><b>結果：</b>新規採用約400人の獲得に貢献。</p>
@@ -570,6 +614,10 @@
                 <div class="portfolio-item">
                     <div class="portfolio-thumbnail">
                         <img src="youtube.jpg" alt="youtube">
+                        <div class="media-type-badge media-video">
+                            <span class="media-icon">🎬</span>
+                            <span>動画</span>
+                        </div>
                         <div class="portfolio-overlay">2024年10月</div>
                     </div>
                     <div class="portfolio-info">
@@ -585,6 +633,10 @@
                 <div class="portfolio-item">
                     <div class="portfolio-thumbnail">
                         <img src="パンフレット.png" alt="パンフレット">
+                        <div class="media-type-badge media-brochure">
+                            <span class="media-icon">📖</span>
+                            <span>パンフレット</span>
+                        </div>
                         <div class="portfolio-overlay">2025年4月</div>
                     </div>
                     <div class="portfolio-info">
@@ -600,6 +652,10 @@
                 <div class="portfolio-item">
                     <div class="portfolio-thumbnail">
                         <img src="web seminar.jpg" alt="WEB　セミナー">
+                        <div class="media-type-badge media-presentation">
+                            <span class="media-icon">📊</span>
+                            <span>プレゼン</span>
+                        </div>
                         <div class="portfolio-overlay"><br>2025年1月</div>
                     </div>
                     <div class="portfolio-info">
@@ -612,6 +668,8 @@
                 </div>
             </div>
         </section>
+
+        <div class="intro-quote"><b>"Done is better than perfect."</b></div>
     </div>
 
     <script>
